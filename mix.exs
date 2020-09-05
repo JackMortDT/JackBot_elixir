@@ -21,7 +21,8 @@ defmodule JackbotElixir.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~>0.22.2"}
+      {:ex_doc, "~>0.22.2"},
+      {:discord_ex, "~> 1.1"}
     ]
   end
 end
