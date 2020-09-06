@@ -1,18 +1,22 @@
 defmodule JackbotElixir do
+  use Application
   @moduledoc """
   Documentation for JackbotElixir.
   """
+  require Logger
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    import Supervisor.Spec
 
-  ## Examples
+    children = [
+      worker(JackbotElixir.Worker, [%{
+        handler: JackbotElixir.Worker,
+        token: Application.get_env(:jackbot_elixir, :token)
+      }])
+    ]
 
-      iex> JackbotElixir.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    opts = [strategy: :one_for_one, name: JackbotElixir.Supervisor]
+    Supervisor.start_link(children, opts)
   end
+
 end
