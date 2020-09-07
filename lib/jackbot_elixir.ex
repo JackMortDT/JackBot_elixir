@@ -3,14 +3,13 @@ defmodule JackbotElixir do
   @moduledoc """
   Documentation for JackbotElixir.
   """
-  require Logger
 
   def start(_type, _args) do
     import Supervisor.Spec
 
     children = [
-      worker(JackbotElixir.Worker, [%{
-        handler: JackbotElixir.Worker,
+      worker(JackbotElixir.Manager.Worker, [%{
+        handler: JackbotElixir.Manager.Worker,
         token: Application.get_env(:jackbot_elixir, :token)
       }])
     ]
